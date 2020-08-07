@@ -23,30 +23,49 @@ const fadeOut = keyframes`
 `;
 
 const Text = styled.div`
-  -webkit-animation: ${props => props.visible ? fadeIn : fadeOut} 2s ease; /* Safari, Chrome and Opera > 12.1 */
-     -moz-animation: ${props => props.visible ? fadeIn : fadeOut} 2s ease; /* Firefox < 16 */
-      -ms-animation: ${props => props.visible ? fadeIn : fadeOut} 2s ease; /* Internet Explorer */
-       -o-animation: ${props => props.visible ? fadeIn : fadeOut} 2s ease; /* Opera < 12.1 */
+  display: ${props => props.visible ? 'block' : 'none' };
+  -webkit-animation: ${props => props.fade ? fadeIn : fadeOut} 2s ease; /* Safari, Chrome and Opera > 12.1 */
+     -moz-animation: ${props => props.fade ? fadeIn : fadeOut} 2s ease; /* Firefox < 16 */
+      -ms-animation: ${props => props.fade ? fadeIn : fadeOut} 2s ease; /* Internet Explorer */
+       -o-animation: ${props => props.fade ? fadeIn : fadeOut} 2s ease; /* Opera < 12.1 */
 `;
 
 function TextFader(props) {
   const { reasons } = props;
   const [index, setIndex] = useState(0);
-  const [visible, setVisible] = useState(false);
+  const [fade, setFade] = useState(true);
+  const [visible, setVisible] = useState(true);
+  const [counter, setCounter] = useState(1);
 
   useEffect(() => {
     let interval = setInterval(() => {
-      setIndex(index => {
-        index += 1;
-        return reasons.length === index ? 0 : index;
-      });
-      setVisible(visible => !visible);
-    }, 5000);
+      if (counter === 10) {
+        console.log('setting index.');
+        setIndex(index => {
+          index += 1;
+          return reasons.length === index ? 0 : index;
+        });
+      }
+
+      if (counter === 8) {
+        console.log('fadeOut!');
+        setTimeout(() => setVisible(false), 1750);
+        setFade(false);
+      }
+
+      if (counter === 1) {
+        console.log('fadeIn!');
+        setVisible(true);
+        setFade(true);
+      }
+
+      setCounter(counter => counter % 10 + 1);
+    }, 1000);
     return () => clearInterval(interval);
   });
 
   return (
-    <Text visible={visible}>{reasons[index]}</Text>
+    <Text visible={visible} fade={fade}>{reasons[index]}</Text>
   )
 }
 
