@@ -65,7 +65,7 @@ function TextFader(props) {
   });
 
   return (
-    <Text visible={visible} fade={fade}>{reasons[index]}</Text>
+    <Text visible={visible} fade={fade}>Hello world, bitches.</Text>
   )
 }
 
