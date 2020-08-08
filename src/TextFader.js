@@ -5,7 +5,7 @@ import { css, keyframes } from '@emotion/core';
 const fadeIn = keyframes`
   from {
     opacity: 0;
-    transform: translateY(-40px);
+    transform: translateY(-20px);
   }
 
   to {
@@ -22,7 +22,7 @@ const fadeOut = keyframes`
 
   to {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(20px);
   }
 `;
 
@@ -47,7 +47,7 @@ const Text = styled.div`
   font-family: 'AnimalCrossing', Courier, sans-serif;
   margin: auto;
   text-align: center;
-  width: 80%;
+  width: 69%;
   display: ${props => props.visible ? 'block' : 'none' };
   -webkit-animation: ${props => props.fade ? fadeIn : fadeOut} 1s ease; /* Safari, Chrome and Opera > 12.1 */
      -moz-animation: ${props => props.fade ? fadeIn : fadeOut} 1s ease; /* Firefox < 16 */
@@ -61,6 +61,7 @@ function TextFader(props) {
   const [fade, setFade] = useState(true);
   const [visible, setVisible] = useState(true);
   const [counter, setCounter] = useState(1);
+  const [audio] = useState(new Audio('https://www.andreabemygirlfriend.com/star.mp3'));
 
   useEffect(() => {
     let interval = setInterval(() => {
@@ -71,6 +72,7 @@ function TextFader(props) {
         });
         setVisible(true);
         setFade(true);
+        audio.play();
       }
 
       if (counter === 9) {
