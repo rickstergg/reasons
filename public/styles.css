@@ -3,3 +3,12 @@ html, body, #root {
   margin: 0;
   height: 100%;
 }
+
+@font-face {
+  font-family: 'AnimalCrossing';
+  src: url('AnimalCrossing.woff2') format('woff2'),
+    url('AnimalCrossing.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
