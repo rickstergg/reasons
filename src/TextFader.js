@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
-import { keyframes } from '@emotion/core';
+import { css, keyframes } from '@emotion/core';
 
 const fadeIn = keyframes`
   from {
@@ -26,7 +26,28 @@ const fadeOut = keyframes`
   }
 `;
 
+const FontSize = css`
+  font-size: 24px;
+
+  @media (min-width: 768px) {
+    font-size: 32px;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 48px;
+  }
+
+  @media (min-width: 1224px) {
+    font-size: 72px;
+  }
+`;
+
 const Text = styled.div`
+  ${FontSize}
+  font-family: 'AnimalCrossing', Courier, sans-serif;
+  margin: auto;
+  text-align: center;
+  width: 80%;
   display: ${props => props.visible ? 'block' : 'none' };
   -webkit-animation: ${props => props.fade ? fadeIn : fadeOut} 1s ease; /* Safari, Chrome and Opera > 12.1 */
      -moz-animation: ${props => props.fade ? fadeIn : fadeOut} 1s ease; /* Firefox < 16 */
