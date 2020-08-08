@@ -29,7 +29,6 @@ function App() {
     .then(
       (result) => {
         const reasons = JSON.parse(result.body).reasons;
-
         setIsLoaded(true);
         setReasons(shuffle(reasons));
       },
